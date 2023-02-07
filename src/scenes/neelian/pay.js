@@ -22,6 +22,7 @@ import { axiosPrivate } from "../../api/axios";
 import useAxiosFunction from "../../hooks/useAxiosFunction";
 import { useEffect } from "react";
 import Invoice from "./Invoice";
+import useAuth from "../../hooks/useAuth";
 
 const Pay = () => {
   const [open, setOpen] = useState(false);
@@ -31,6 +32,9 @@ const Pay = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const [tran, data, error, loading, axiosFetch] = useAxiosFunction();
   console.log(location.state);
+
+  const { auth } = useAuth();
+  console.log("auth", auth);
 
   const { uniNo, fees, curr, classNo } = location?.state;
 
@@ -89,7 +93,8 @@ const Pay = () => {
         billerId: "BE-N001",
         channelId: 10,
         billerKey: "NS0001023",
-        branch: "SD0010001",
+        // branch: "SD0010001",
+        branch: auth.bracnh,
       },
     });
     console.log(tran);
