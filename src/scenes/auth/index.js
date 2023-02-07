@@ -41,9 +41,9 @@ export default function SignIn() {
       console.log("test");
       const res = await axios.get("/auth/is_authenticated");
       console.log(res.data.data);
-      const { username, role } = res.data.data;
+      const { username, role, bracnh } = res.data.data;
       // localStorage.setItem("persist", JSON.stringify({ username, role }));
-      setAuth({ username, role });
+      setAuth({ username, role, bracnh });
       console.log(auth);
     }
     navigate("/");
