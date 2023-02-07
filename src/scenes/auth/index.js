@@ -13,7 +13,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import useAuth from "../../hooks/useAuth";
-import axiosPrivate from "../../api/axios";
+
 import { useNavigate } from "react-router-dom";
 import useAxiosFunction from "../../hooks/useAxiosFunction";
 import axios from "../../api/axios";
@@ -29,7 +29,7 @@ export default function SignIn() {
   const handleFormSubmit = async (values) => {
     console.log(values);
     await axiosFetch({
-      axiosInstance: axiosPrivate,
+      axiosInstance: axios,
       method: "post",
       url: "/auth/login",
       requestConfig: {

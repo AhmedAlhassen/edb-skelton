@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import { useNavigate } from "react-router-dom";
+import useAuth from "./useAuth";
 const useAxiosFunction = () => {
   const [response, setResponse] = useState([]);
   const [data, setData] = useState([]);
@@ -7,9 +9,14 @@ const useAxiosFunction = () => {
   const [loading, setLoading] = useState(false); //different!
   const [controller, setController] = useState();
 
+  const navigate = useNavigate();
+
+  const { setAuth } = useAuth();
+
   const axiosFetch = async (configObj) => {
     const { axiosInstance, method, url, requestConfig = {} } = configObj;
     console.log({ ...requestConfig });
+
     try {
       setLoading(true);
       const ctrl = new AbortController();
@@ -22,8 +29,15 @@ const useAxiosFunction = () => {
       setResponse(res);
       setData(res.data);
     } catch (err) {
-      console.log(err.message);
-      setError(err.message);
+      if (err.response.status === 401) {
+        console.log("refresh fiald");
+
+        setAuth({});
+
+        navigate("/login");
+      }
+      console.log(err);
+      setError(err?.response?.data?.message);
     } finally {
       setLoading(false);
     }

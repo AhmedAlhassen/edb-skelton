@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import { Route, Routes } from "react-router-dom";
-import Topbar from "./components/global/Topbar";
-import Sidebar from "./components/global/Sidebar";
 import Dashboard from "./scenes/dashboard";
 import Neelian from "./scenes/neelian";
 import Pay from "./scenes/neelian/pay";
@@ -12,7 +10,7 @@ import SignIn from "./scenes/auth";
 import Layout from "./components/global/Layout";
 import RequireAuth from "./components/global/RequireAuth";
 import useAxiosFunction from "./hooks/useAxiosFunction";
-import { axiosPrivate } from "./api/axios";
+import Invoice from "./scenes/neelian/Invoice";
 
 const ROLES = {
   Admin: "admin",
@@ -28,14 +26,15 @@ function App() {
         <CssBaseline />
 
         <Routes>
+          <Route path="invoce" element={<Invoice />} />
           <Route path="/" element={<Layout />}>
             <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
               <Route path="/" element={<Dashboard />} />
-            </Route>
-
-            <Route path="/" element={<Root />}>
-              <Route path="neelian" element={<Neelian />} />
-              <Route path="neelian/pay" element={<Pay />} />
+              <Route path="/" element={<Root />}>
+                <Route path="neelian" element={<Neelian />} />
+                <Route path="neelian/pay" element={<Pay />} />
+                <Route path="neelian/invoce" element={<Invoice />} />
+              </Route>
             </Route>
           </Route>
 

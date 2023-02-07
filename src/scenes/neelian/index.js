@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Formik } from "formik";
 import * as yup from "yup";
 import {
@@ -6,50 +6,52 @@ import {
   Button,
   Card,
   TextField,
+  CircularProgress,
   CardContent,
   Typography,
   CardActions,
 } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
-import axios from "../../api/axios";
+
 import { useNavigate, Link } from "react-router-dom";
-import { useReactToPrint } from "react-to-print";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { axiosPrivate } from "../../api/axios";
+import useAxiosFunction from "../../hooks/useAxiosFunction";
+import Inquery from "./Inquery";
 
 const Neelian = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
-  const [errMsg, setErrMsg] = useState("");
-  const [student, setStudent] = useState();
-  const recipttRef = useRef();
-  const navigate = useNavigate();
-  const handlePrint = useReactToPrint({
-    content: () => recipttRef.current,
-  });
+
+  const [response, data, error, loading, axiosFetch] = useAxiosFunction();
+  console.log(data.length);
 
   const handleFormSubmit = async (values) => {
     // e.preventDefault();
     console.log(values);
-
-    try {
-      const response = await axios.get(`/neelain/${values.uniNo}`);
-      console.log(JSON.stringify(response?.data));
-      setStudent(response.data);
-    } catch (err) {
-      if (!err?.response) {
-        setErrMsg("No Server Response");
-      } else if (err.response?.status === 400) {
-        setErrMsg("Missing Username or Password");
-      } else if (err.response?.status === 401) {
-        setErrMsg("Unauthorized");
-      } else {
-        setErrMsg("Login Failed");
-      }
-    }
+    await axiosFetch({
+      axiosInstance: axiosPrivate,
+      method: "get",
+      url: `/neelian/${values.uniNo}`,
+    });
   };
 
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
+  useEffect(() => {
+    if (data && data.length !== 0) {
+      toast.success("Sucess");
+    }
+  }, [data]);
   return (
     <Box m="20px" mt="20px">
+      <ToastContainer />
       <Header title="Inquery" subtitle="Inquery Student detials" />
+
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={initialValues}
@@ -69,7 +71,9 @@ const Neelian = () => {
               gap="30px"
               gridTemplateColumns="repeat(4, minmax(0, 1fr))"
               sx={{
-                "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
+                "& > div": {
+                  gridColumn: isNonMobile ? undefined : "span 4",
+                },
               }}
             >
               <TextField
@@ -94,77 +98,23 @@ const Neelian = () => {
                     p: "15px",
                   }}
                 >
-                  Inquery
+                  {loading ? (
+                    <CircularProgress
+                      sx={{
+                        fontSize: "5px",
+                      }}
+                    />
+                  ) : (
+                    "Inquery"
+                  )}
                 </Button>
               </Box>
             </Box>
           </form>
         )}
       </Formik>
-      {student && (
-        <Box mt="20px">
-          <Card sx={{ maxWidth: 470, textAlign: "right" }}>
-            <CardContent ref={recipttRef}>
-              <Typography variant="h3">
-                الرقم الجامعي : {student.data.universityno}
-              </Typography>
-              <Typography variant="h3" component="div">
-                الاسم : {student.data.name01}
-              </Typography>
-              <Typography variant="h5">
-                المبلغ: {student.data.rem_feez}
-              </Typography>
-              <Typography variant="body2">
-                {(student.data.currency = "1001" ? "SDG" : "USD")} : العملة
-                <br />
-                رقم الكلية : {student.data.fac}
-                <br />
-                الفصل الدراسي : {student.data.class_no}
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Box
-                display="flex"
-                alignItems="baseline"
-                justifyContent="space-between"
-                width="100%"
-              >
-                <Button
-                  color="secondary"
-                  size="large"
-                  variant="contained"
-                  sx={{
-                    p: "15px",
-                  }}
-                  onClick={() =>
-                    navigate("pay", {
-                      state: {
-                        uniNo: student.data.universityno,
-                        fees: student.data.rem_feez,
-                        curr: student.data.currency,
-                        classNo: student.data.class_no,
-                      },
-                    })
-                  }
-                >
-                  دفع
-                </Button>
-                <Button
-                  color="secondary"
-                  size="large"
-                  variant="contained"
-                  sx={{
-                    p: "15px",
-                  }}
-                  onClick={handlePrint}
-                >
-                  طباعة
-                </Button>
-              </Box>
-            </CardActions>
-          </Card>
-        </Box>
-      )}
+
+      {data.length !== 0 && <Inquery data={data.data.data} />}
     </Box>
   );
 };
