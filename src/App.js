@@ -14,6 +14,7 @@ import Invoice from "./scenes/neelian/Invoice";
 
 const ROLES = {
   Admin: "admin",
+  User: "user",
 };
 
 function App() {
@@ -28,7 +29,9 @@ function App() {
         <Routes>
           <Route path="invoce" element={<Invoice />} />
           <Route path="/" element={<Layout />}>
-            <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+            <Route
+              element={<RequireAuth allowedRoles={[ROLES.Admin, ROLES.User]} />}
+            >
               <Route path="/" element={<Dashboard />} />
               <Route path="/" element={<Root />}>
                 <Route path="neelian" element={<Neelian />} />
