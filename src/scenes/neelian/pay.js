@@ -97,16 +97,27 @@ const Pay = () => {
         branch: auth.bracnh,
       },
     });
-    console.log(tran);
-    if (tran.status !== 201) {
-      console.log(error);
+    // console.log(tran);
+    // if (tran.status !== 201) {
+    //   console.log(error);
+    //   toast.error(error);
+    // }
+    // if (tran.status === 201) {
+    //   console.log(tran);
+    //   toast.success("payed");
+    // }
+  };
+
+  useEffect(() => {
+    if (error) {
       toast.error(error);
     }
-    if (tran.status === 201) {
-      console.log(tran);
-      toast.success("payed");
+  }, [error]);
+  useEffect(() => {
+    if (data && data.length !== 0) {
+      toast.success("Sucess");
     }
-  };
+  }, [data]);
 
   return (
     <Box m="20px" mt="20px">

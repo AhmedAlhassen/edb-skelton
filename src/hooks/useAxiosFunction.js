@@ -16,7 +16,8 @@ const useAxiosFunction = () => {
   const axiosFetch = async (configObj) => {
     const { axiosInstance, method, url, requestConfig = {} } = configObj;
     console.log({ ...requestConfig });
-
+    setData([]);
+    setError("");
     try {
       setLoading(true);
       const ctrl = new AbortController();
@@ -50,6 +51,7 @@ const useAxiosFunction = () => {
     return () => controller && controller.abort();
   }, [controller]);
 
+  console.log("axios", error, data);
   return [response, data, error, loading, axiosFetch];
 };
 
