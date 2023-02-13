@@ -30,7 +30,7 @@ const Inquery = ({ data }) => {
         </Box>
 
         <Typography variant="h3" sx={{ gridColumn: "span 2" }}>
-          الرقم الجامعي : {data?.universityno}
+          {data?.universityno} : الرقم الجامعي
         </Typography>
         <Typography variant="h3" sx={{ gridColumn: "span 2" }}>
           الاسم : {data?.name01}
@@ -71,6 +71,7 @@ const Inquery = ({ data }) => {
             navigate("pay", {
               state: {
                 uniNo: data.universityno,
+                name: data.name01,
                 fees: data.rem_feez,
                 curr: data.currency,
                 classNo: data.class_no,

@@ -36,7 +36,7 @@ const Pay = () => {
   const { auth } = useAuth();
   console.log("auth", auth);
 
-  const { uniNo, fees, curr, classNo } = location?.state;
+  const { uniNo, fees, curr, classNo, name } = location?.state;
 
   const checkoutSchema = yup.object().shape({
     universityno: yup.string().required("required"),
@@ -358,7 +358,7 @@ const Pay = () => {
         >
           <DialogContent dividers>
             <DialogContentText>
-              <Invoice data={data.data} />
+              <Invoice data={data.data} name={name} />
             </DialogContentText>
           </DialogContent>
         </Dialog>

@@ -3,13 +3,21 @@ import { useReactToPrint } from "react-to-print";
 import { useRef } from "react";
 import logo from "./edb.jpg";
 
-const Invoice = ({ data }) => {
+const Invoice = ({ data, name }) => {
   const recipttRef = useRef();
   console.log(data);
 
   const handlePrint = useReactToPrint({
     content: () => recipttRef.current,
   });
+  let today = new Date();
+  let date =
+    today.getDate() +
+    "-" +
+    parseInt(today.getMonth() + 1) +
+    "-" +
+    today.getFullYear();
+  console.log(new Intl.NumberFormat().format(data?.amount));
 
   return (
     <Container>
@@ -34,24 +42,29 @@ const Invoice = ({ data }) => {
           textAlign="center"
           sx={{ gridColumn: "span 4" }}
         >
-          {data?.tranDate}
+          {date}
         </Typography>
+
         <Divider sx={{ gridColumn: "span 4" }} variant="fullWidth" />
         <Typography variant="h3" sx={{ gridColumn: "span 2" }}>
           {data?.voucher} : رقم الايصال
         </Typography>
         <Typography variant="h3" sx={{ gridColumn: "span 2" }}>
-          الرقم الجامعي: {data?.uniNo}
+          الاسم : {name}
         </Typography>
         <Typography variant="h3" sx={{ gridColumn: "span 2" }}>
-          المبلغ : {data?.amount}
+          {data?.uniNo} : الرقم الجامعي
+        </Typography>
+
+        <Typography variant="h3" sx={{ gridColumn: "span 2" }}>
+          المبلغ : {new Intl.NumberFormat().format(data?.amount)}
         </Typography>
         <Typography variant="h3" sx={{ gridColumn: "span 2" }}>
           العمولة : {data?.commission}
         </Typography>
 
         <Typography variant="h3" sx={{ gridColumn: "span 2" }}>
-          الفرع : {data?.branch}
+          {data?.branch} : الفرع
         </Typography>
         <Typography variant="h3" sx={{ gridColumn: "span 2" }}>
           العام الدراسي : {data?.classNo}
