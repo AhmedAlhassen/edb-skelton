@@ -4,6 +4,7 @@ import { useReactToPrint } from "react-to-print";
 import { useNavigate } from "react-router-dom";
 import logo from "./edb.jpg";
 const Inquery = ({ data }) => {
+  console.log("data", data);
   const recipttRef = useRef();
   const navigate = useNavigate();
 
@@ -39,7 +40,7 @@ const Inquery = ({ data }) => {
           المبلغ : {data?.rem_feez}
         </Typography>
         <Typography variant="h3" sx={{ gridColumn: "span 2" }}>
-          {(data.currency = "1001" ? "SDG" : "USD")} : العملة
+          {data.currency === "1002" ? "USD" : "SDG"} : العملة
         </Typography>
         <Typography variant="h3" sx={{ gridColumn: "span 2" }}>
           رقم الكلية : {data?.fac}

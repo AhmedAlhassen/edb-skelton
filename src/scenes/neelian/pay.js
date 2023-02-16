@@ -82,7 +82,7 @@ const Pay = () => {
   };
   const handleFormSubmit = async (values) => {
     // e.preventDefault();
-    console.log(values);
+    console.log("vaues", values);
     await axiosFetch({
       axiosInstance: axiosPrivate,
       method: "post",
