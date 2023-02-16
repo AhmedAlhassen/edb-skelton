@@ -37,6 +37,7 @@ const Pay = () => {
   console.log("auth", auth);
 
   const { uniNo, fees, curr, classNo, name } = location?.state;
+  console.log(curr);
 
   const checkoutSchema = yup.object().shape({
     universityno: yup.string().required("required"),
@@ -71,7 +72,7 @@ const Pay = () => {
   const initialValues = {
     universityno: uniNo,
     amount: parseInt(fees),
-    currency: curr === "SDG" ? "1001" : "1002",
+    currency: curr,
     class_no: classNo,
     paymentMethod: 20,
     account: "",
