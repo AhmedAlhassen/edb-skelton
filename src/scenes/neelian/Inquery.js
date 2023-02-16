@@ -40,7 +40,7 @@ const Inquery = ({ data }) => {
           المبلغ : {data?.rem_feez}
         </Typography>
         <Typography variant="h3" sx={{ gridColumn: "span 2" }}>
-          {data.currency === "1002" ? "USD" : "SDG"} : العملة
+          {data.currency === "1002" ? "USD" : null} : العملة
         </Typography>
         <Typography variant="h3" sx={{ gridColumn: "span 2" }}>
           رقم الكلية : {data?.fac}
