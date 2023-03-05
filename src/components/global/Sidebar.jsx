@@ -9,6 +9,8 @@ import SchoolIcon from "@mui/icons-material/School";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import PrintIcon from "@mui/icons-material/Print";
 import KeyIcon from "@mui/icons-material/Key";
+import PeopleIcon from "@mui/icons-material/People";
+import ReceiptIcon from "@mui/icons-material/Receipt";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -128,6 +130,22 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
+            <Item
+              title="Transactions"
+              to="/trans"
+              icon={<ReceiptIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            {JSON.parse(localStorage.getItem("presist"))?.role?.id === 2 ? (
+              <Item
+                title="Users"
+                to="/users"
+                icon={<PeopleIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+            ) : null}
           </Box>
         </Menu>
       </ProSidebar>

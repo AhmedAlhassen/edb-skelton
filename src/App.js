@@ -14,6 +14,7 @@ import Invoice from "./scenes/neelian/Invoice";
 import ChangePassword from "./scenes/settings/ChangePassword";
 import Users from "./scenes/users/Index";
 import PrintRecipt from "./scenes/neelian/PrintRecipt";
+import Trans from "./scenes/trans/Index";
 
 const ROLES = {
   Admin: "admin",
@@ -43,6 +44,7 @@ function App() {
                 <Route path="neelian" element={<Neelian />} />
                 <Route path="neelian/pay" element={<Pay />} />
                 <Route path="neelian/invoce" element={<Invoice />} />
+                <Route path="trans" element={<Trans />} />
                 <Route path="neelian/reprint" element={<PrintRecipt />} />
               </Route>
               <Route path="/changepassword" element={<ChangePassword />} />
