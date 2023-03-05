@@ -47,6 +47,7 @@ const Pay = () => {
     amount: yup
       .number()
       .min(parseInt(fees) * 0.5)
+      .max(parseInt(fees))
       .required("incorrect"),
     account: yup.string().when(["paymentMethod"], {
       is: (paymentMethod) => paymentMethod === 20,
@@ -110,8 +111,10 @@ const Pay = () => {
   };
 
   useEffect(() => {
+    // console.log(tran);
+
     if (error) {
-      toast.error(error);
+      toast.error(error.statusText);
     }
   }, [error]);
   useEffect(() => {
@@ -162,7 +165,7 @@ const Pay = () => {
               <TextField
                 fullWidth
                 type="number"
-                label="Fees"
+                label="Amount"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.amount}
@@ -217,7 +220,7 @@ const Pay = () => {
               >
                 <MenuItem value={10}>Cash</MenuItem>
                 <MenuItem value={20}>Transfer</MenuItem>
-                <MenuItem value={30}>Check</MenuItem>
+                <MenuItem value={30}>Cheque</MenuItem>
               </Select>
             </Box>
             {values.paymentMethod && values.paymentMethod === 10 ? (
@@ -307,7 +310,7 @@ const Pay = () => {
                 <TextField
                   fullWidth
                   type="text"
-                  label="Teller Trans Ref"
+                  label="Cheque Number"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.chequeNo}
@@ -350,6 +353,7 @@ const Pay = () => {
       </Formik>
 
       {loading && <p>loading...</p>}
+      {/* {error && <p>{error}</p>} */}
       {data.length !== 0 && (
         <Dialog
           open={open}

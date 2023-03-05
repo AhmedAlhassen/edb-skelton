@@ -11,6 +11,9 @@ import Layout from "./components/global/Layout";
 import RequireAuth from "./components/global/RequireAuth";
 import useAxiosFunction from "./hooks/useAxiosFunction";
 import Invoice from "./scenes/neelian/Invoice";
+import ChangePassword from "./scenes/settings/ChangePassword";
+import Users from "./scenes/users/Index";
+import PrintRecipt from "./scenes/neelian/PrintRecipt";
 
 const ROLES = {
   Admin: "admin",
@@ -29,6 +32,9 @@ function App() {
         <Routes>
           <Route path="invoce" element={<Invoice />} />
           <Route path="/" element={<Layout />}>
+            <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+              <Route path="/users" element={<Users />}></Route>
+            </Route>
             <Route
               element={<RequireAuth allowedRoles={[ROLES.Admin, ROLES.User]} />}
             >
@@ -37,7 +43,9 @@ function App() {
                 <Route path="neelian" element={<Neelian />} />
                 <Route path="neelian/pay" element={<Pay />} />
                 <Route path="neelian/invoce" element={<Invoice />} />
+                <Route path="neelian/reprint" element={<PrintRecipt />} />
               </Route>
+              <Route path="/changepassword" element={<ChangePassword />} />
             </Route>
           </Route>
 

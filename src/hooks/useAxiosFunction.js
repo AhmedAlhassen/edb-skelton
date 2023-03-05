@@ -16,6 +16,7 @@ const useAxiosFunction = () => {
   const axiosFetch = async (configObj) => {
     const { axiosInstance, method, url, requestConfig = {} } = configObj;
     console.log({ ...requestConfig });
+    setResponse([]);
     setData([]);
     setError("");
     try {
@@ -24,11 +25,12 @@ const useAxiosFunction = () => {
       setController(ctrl);
       const res = await axiosInstance[method.toLowerCase()](url, {
         ...requestConfig,
-        signal: ctrl.signal,
+        // signal: ctrl.signal,
       });
       console.log(res);
       setResponse(res);
       setData(res.data);
+      setLoading(false);
     } catch (err) {
       if (err.response.status === 401) {
         console.log("refresh fiald");
@@ -37,8 +39,8 @@ const useAxiosFunction = () => {
 
         navigate("/login");
       }
-      console.log(err);
-      setError(err?.response?.data?.message);
+      console.log("axios Error", err);
+      setError(err?.response);
     } finally {
       setLoading(false);
     }
