@@ -122,7 +122,7 @@ const Users = () => {
       id: valuse.id,
       username: valuse.username,
       bracnh: valuse.bracnh,
-      role: valuse.role === "admin" ? 1 : 3,
+      role: valuse.role === "admin" ? 2 : 3,
     });
     console.log(initialValues);
   };
@@ -329,7 +329,7 @@ const Users = () => {
                         onChange={handleChange}
                         sx={{ gridColumn: "span 4" }}
                       >
-                        <MenuItem value={1}>Admin</MenuItem>
+                        <MenuItem value={2}>Admin</MenuItem>
                         <MenuItem value={3}>User</MenuItem>
                       </Select>
                     </Box>
