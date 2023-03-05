@@ -58,7 +58,7 @@ const Invoice = ({ data, name }) => {
           textAlign="center"
           sx={{ gridColumn: "span 4" }}
         >
-          {moment(data?.tranDate).format("LLLL")}
+          {moment(data?.tranDate).format("DD MM YYYY hh:mm:ss")}
         </Typography>
 
         <Divider sx={{ gridColumn: "span 4" }} variant="fullWidth" />

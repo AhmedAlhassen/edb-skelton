@@ -24,7 +24,9 @@ const PrintRecipt = () => {
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const [response, data, error, loading, axiosFetch] = useAxiosFunction();
   const [std, stdData, stdError, stdLoading, stdAxiosFetch] =
@@ -39,10 +41,6 @@ const PrintRecipt = () => {
       method: "get",
       url: `/trans/${values.voucherNo}`,
     });
-    if (data && data.length !== 0) {
-      fetchStudentDetials(data?.data?.billId);
-      console.log(stdData);
-    }
   };
 
   const fetchStudentDetials = async (billId) => {
@@ -60,17 +58,22 @@ const PrintRecipt = () => {
 
   useEffect(() => {
     if (error) {
-      toast.error(error);
+      toast.error(error.statusText);
     }
   }, [error]);
   useEffect(() => {
     if (data && data.length !== 0) {
+      fetchStudentDetials(data?.data?.billId);
+      console.log(stdData);
+    }
+  }, [data]);
+  useEffect(() => {
+    if (stdData && stdData?.data) {
       toast.success("Sucess");
       handleOpen();
     }
-  }, [data]);
-  let datas = {};
-  useEffect(() => {}, [stdData]);
+  }, [stdData]);
+
   return (
     <div>
       <Box m="20px" mt="20px">

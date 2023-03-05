@@ -7,6 +7,8 @@ import { tokens } from "../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import SchoolIcon from "@mui/icons-material/School";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import PrintIcon from "@mui/icons-material/Print";
+import KeyIcon from "@mui/icons-material/Key";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -108,6 +110,21 @@ const Sidebar = () => {
               title="Neelian"
               to="/neelian"
               icon={<SchoolIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Recipt Reprint"
+              to="/neelian/reprint"
+              icon={<PrintIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
+            <Item
+              title="Change password"
+              to="/changepassword"
+              icon={<KeyIcon />}
               selected={selected}
               setSelected={setSelected}
             />
