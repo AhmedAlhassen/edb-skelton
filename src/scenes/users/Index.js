@@ -129,7 +129,7 @@ const Users = () => {
 
   const handleFormSubmit = async (values) => {
     // e.preventDefault();
-
+    setEdit(false);
     console.log(values);
     await axiosFetch({
       axiosInstance: axiosPrivate,

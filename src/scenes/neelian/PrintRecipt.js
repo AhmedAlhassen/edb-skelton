@@ -160,7 +160,7 @@ const PrintRecipt = () => {
                   commission: data?.data?.commission,
                   voucher: data?.data?.voucher,
                   tranDate: data?.data?.createdate,
-                  classNo: stdData?.data?.class_no,
+                  classNo: stdData?.data?.data?.class_no,
                   branch: data?.data?.branch,
                   currency: data?.data?.curr,
                 }}
