@@ -14,16 +14,44 @@ const MuiDatatable = ({ col, data, hanlePrint }) => {
     showLabels: true,
     useBom: true,
     useKeysAsHeaders: false,
-    headers: col.map((c) => c.header),
+    headers: [
+      "Id",
+      "Bill Id",
+      "Ammount",
+      "Commission",
+      "Currency",
+      "Account",
+      "Teller Trans Ref",
+      "Cheque Date",
+      "Cheque Collect REF",
+      "Cheque NO",
+      "Voucher",
+      "Branch",
+      "Auther",
+      "Date",
+      "Status",
+    ],
   };
   const csvExporter = new ExportToCsv(csvOptions);
 
   const handleExportRows = (rows) => {
-    csvExporter.generateCsv(rows.map((row) => row.original));
+    const toPrint = [];
+    rows.map((row) => {
+      const { biler, paymentM, uuid, updateddate, ...original } = row.original;
+
+      toPrint.push(original);
+    });
+    csvExporter.generateCsv(toPrint);
   };
 
   const handleExportData = () => {
-    csvExporter.generateCsv(data);
+    const dataToPrint = [];
+    data.map((row) => {
+      const { biler, paymentM, uuid, updateddate, ...original } = row;
+      dataToPrint.push(original);
+    });
+
+    csvExporter.generateCsv(dataToPrint);
   };
   return (
     <MaterialReactTable
@@ -38,9 +66,8 @@ const MuiDatatable = ({ col, data, hanlePrint }) => {
       enableRowSelection
       positionToolbarAlertBanner="bottom"
       enableColumnResizing
-      //   columnResizeMode="onEnd"
+      columnResizeMode="onEnd"
       enableColumnOrdering
-      enableClickToCopy
       renderTopToolbarCustomActions={({ table }) => (
         <Box
           sx={{ display: "flex", gap: "1rem", p: "0.5rem", flexWrap: "wrap" }}
