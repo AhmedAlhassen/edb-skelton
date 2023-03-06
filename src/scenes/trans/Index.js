@@ -36,7 +36,7 @@ const Trans = () => {
     useAxiosFunction();
 
   const columns = [
-    { accessorKey: "id", header: "ID", size: 20, enableClickToCopy: true },
+    { accessorKey: "id", header: "ID", size: 20 },
     {
       accessorKey: "billId",
       header: "Bill ID",
@@ -48,7 +48,6 @@ const Trans = () => {
       accessorKey: "commission",
       header: "Commission",
       size: 70,
-      enableClickToCopy: true,
     },
     {
       accessorKey: "curr",
