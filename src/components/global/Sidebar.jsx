@@ -94,7 +94,7 @@ const Sidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Admin
+                  {JSON.parse(localStorage.getItem("presist"))?.username}
                 </Typography>
               </Box>
             </Box>

@@ -77,8 +77,9 @@ const Trans = () => {
       accessorKey: "createdate",
       header: "Date",
       size: 200,
-      valueFormatter: (params) =>
-        moment(params?.value).format("DD/MM/YYYY hh:mm A"),
+      accessorFn: (row) => moment(row.createdate).format("DD/MM/YYYY hh:mm A"),
+      // valueFormatter: (params) =>
+      //   moment(params?.value).format("DD/MM/YYYY hh:mm A"),
       enableClickToCopy: true,
     },
     {

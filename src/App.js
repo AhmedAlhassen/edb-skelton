@@ -48,6 +48,7 @@ function App() {
                 <Route path="neelian/reprint" element={<PrintRecipt />} />
               </Route>
               <Route path="/changepassword" element={<ChangePassword />} />
+              {/* <Route path="/logout" element={<ChangePassword />} /> */}
             </Route>
           </Route>
 

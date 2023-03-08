@@ -6,7 +6,6 @@ import { ExportToCsv } from "export-to-csv";
 import LocalPrintshopIcon from "@mui/icons-material/LocalPrintshop";
 
 const MuiDatatable = ({ col, data, hanlePrint }) => {
-  console.log(col);
   const csvOptions = {
     fieldSeparator: ",",
     quoteStrings: '"',
@@ -68,6 +67,7 @@ const MuiDatatable = ({ col, data, hanlePrint }) => {
       enableColumnResizing
       columnResizeMode="onEnd"
       enableColumnOrdering
+      enableColumnFilterModes
       renderTopToolbarCustomActions={({ table }) => (
         <Box
           sx={{ display: "flex", gap: "1rem", p: "0.5rem", flexWrap: "wrap" }}
