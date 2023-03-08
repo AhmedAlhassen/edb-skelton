@@ -239,7 +239,7 @@ const Pay = () => {
                   label="Teller Trans Ref"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.tellerTransRef.trim}
+                  value={values.tellerTransRef.trim()}
                   name="tellerTransRef"
                   error={!!touched.tellerTransRef && !!errors.tellerTransRef}
                   helperText={touched.tellerTransRef && errors.tellerTransRef}
@@ -262,7 +262,7 @@ const Pay = () => {
                   label="Account"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.account.trim}
+                  value={values.account.trim()}
                   name="account"
                   error={!!touched.account && !!errors.account}
                   helperText={touched.account && errors.account}
@@ -285,7 +285,7 @@ const Pay = () => {
                   label="Cheque Date"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.chequeDate.trim}
+                  value={values.chequeDate.trim()}
                   name="chequeDate"
                   error={!!touched.chequeDate && !!errors.chequeDate}
                   helperText={touched.chequeDate && errors.chequeDate}
@@ -297,7 +297,7 @@ const Pay = () => {
                   label="Cheque Collect Ref"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.chequeCollectRef.trim}
+                  value={values.chequeCollectRef.trim()}
                   name="chequeCollectRef"
                   error={
                     !!touched.chequeCollectRef && !!errors.chequeCollectRef
@@ -313,7 +313,7 @@ const Pay = () => {
                   label="Cheque Number"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.chequeNo.trim}
+                  value={values.chequeNo.trim()}
                   name="chequeNo"
                   error={!!touched.chequeNo && !!errors.chequeNo}
                   helperText={touched.chequeNo && errors.chequeNo}
